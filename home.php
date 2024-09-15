@@ -1,0 +1,111 @@
+<?php
+require('config.php');
+
+if( $_SESSION['login'] != "yes" ){
+  header("Location: login.php?SessionExpired");
+  exit;
+}
+?>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="bg bg-opacity-75" style="min-height: 200vh;">
+    <nav class="navbar navbar-expand-lg bg-body-secondary fixed-top">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="https://th.bing.com/th/id/OIP.FJ_Lnwns5vGimrdrSYATywHaGd?w=181&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" width="100px" height="80px" class="p-2">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="active">
+                    <a class="nav-link active" aria-current="page" href="home.php"><i class="far fa-home"></i>Home</a>
+                </li>
+                <li class="categories">
+                  <a class="nav-link" href="#">categories</a>
+                  <ul class="sub-menu">
+                    <div class="sub-sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="studentscorner.php">students-corner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">teachers-corner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">achievements</a></li>
+                  </div>
+                  </ul>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#">contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link "  href="updateprofile.php">Update Profile</a>
+                </li>
+            </ul> 
+              <form class="d-flex justify-content-center ps-5" role="search">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="margin-left: 18vw; width: 300px;
+        height: 40px;">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <div class="logout">
+                  <button class="btn btn-sm btn-outline-danger " onclick="window.location.href='login.php?submit=logout'">Logout</button>
+                </div>
+          </div>
+      </div>
+    </nav>
+ <div class="container">
+      <h1>Welcome to the My Tutorial Website</h1>
+      <p> SAI TUTORIAL</p>
+    </div>
+     <style>
+      .container {
+        margin-top: 20vh;
+        text-align: right;
+      }
+    .logout {
+        width: 40px;
+        height: 58px;
+        margin-left: 5vw;
+        padding-bottom: 5px;
+        padding-top: 5px;
+      }
+      .categories:hover .sub-menu {
+        display: block;
+      }
+      .sub-menu {
+        position: absolute;
+        left: 0;
+        list-style-type: none;
+        background-color: green;
+        padding: 0;
+          margin-top: 0px;
+          margin-bottom: 100px;
+          margin-right: 150px;
+          margin-left: 180px;
+        border: 1px solid #ccc;
+        display: none;
+      }
+      .sub-menu li {
+        display: block;
+      }
+      .sub-menu li a {
+        display: block;
+        padding: 10px;
+        color: #000;
+        text-decoration: none;
+      }
+      .sub-menu li a:hover {
+        background-color: #f2f2f2;
+      }
+
+      .container-fluid{
+        height: 50px;
+      }
+  </style>
+</div>
+  </body>
+  </html>

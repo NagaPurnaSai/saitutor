@@ -1,0 +1,70 @@
+<?php
+// Save the order details to the database
+// Replace this code with your own database code
+require('config.php');
+
+if( $_SESSION['login'] != "yes" ){
+  header("Location: login.php?SessionExpired");
+  exit;
+}
+// Get the image ID and order details from the form
+$image_id = $_POST['image_id'];
+$name = $_POST['name'];
+$email = $_POST['email'];
+$sql = "INSERT INTO orders (image_id, name, email) VALUES ('$image_id', '$name', '$email')";
+mysqli_query($con, $sql);
+mysqli_close($con);
+
+// Redirect to a thank you page
+header('Location: studentscorner.php');
+?>
+<html>
+<body>
+<button id="booksBtn">Books</button>
+<div id="booksImages"></div>
+<div id="orderForm"></div>
+
+<script>
+// Define an array of book images
+const bookImages = [
+  'bq-question.jpg',
+  'bg-question2.jpg',
+  'bg-question3.jpg',
+  // Add more images here
+];
+
+// Get the books button and books images container
+const booksBtn = document.getElementById('booksBtn');
+const booksImages = document.getElementById('booksImages');
+
+// Add a click event listener to the books button
+booksBtn.addEventListener('click', () => {
+  // Clear the books images container
+  booksImages.innerHTML = '';
+  
+  // Display 4 random book images
+  for (let i = 0; i < 4; i++) {
+    const imageIndex = Math.floor(Math.random() * bookImages.length);
+    const imageUrl = bookImages[imageIndex];
+    const imageElement = document.createElement('img');
+    imageElement.src = imageUrl;
+    imageElement.addEventListener('click', () => {
+      // Open the order form
+      const orderForm = document.getElementById('orderForm');
+      orderForm.innerHTML = `
+        <form method="post" action="save_order.php">
+          <input type="hidden" name="image_id" value="${imageIndex}">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name">
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email">
+          <button type="submit">Submit</button>
+        </form>
+      `;
+    });
+    booksImages.appendChild(imageElement);
+  }
+});
+</script>
+</body>
+</html>
